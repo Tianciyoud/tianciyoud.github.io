@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>rule_page</title>
+  <style>
+    body {
+      background-image: url('back3.jpg');
+      background-size: cover; /* 确保图片铺满整个页面 */
+      background-repeat: no-repeat; /* 防止图片重复显示 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* 让页面充满视口的高度 */
+      margin: 0;
+    }
+
+    .container {
+      background-color: rgba(0, 0, 0, 0.5); /* 半透明的灰色背景 */
+      border-radius: 20px; /* 圆角边框 */
+      padding: 20px;
+      text-align: center;
+    }
+
+    h5, p {
+      color: white; /* 文字颜色为白色 */
+    }
+
+    button {
+      background-color: #750000; /* 按钮背景颜色 */
+      color: white; /* 按钮文字颜色 */
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+<body>
+<div class="container">
+  <h5>欢迎来到我的海龟汤游戏</h5>
+  <h5>请先了解一下海龟汤的游戏规则：</h5>
+  <p>海龟汤游戏又叫情境推理，它需要玩家发挥想象力和经验猜测故事的真相，并对猜测发起<br>验证，线上的玩法一般是“关键词提问”，即玩家根据出题者给出的关键词进行提问。</p>
+  <p>有些提问被回答后，还会追加一些说明，提供一些额外的信息，这些信息通常很重要~当<br>问到关键问题时，还会引出新的关键词。</p>
+  <p>海龟汤游戏的挑战之处就在于用尽可能少的问题来还原事件的真相，这也是海龟汤游戏的<br>乐趣所在。<p>
+  <p>那么，现在开始游戏吧！</p>
+  <button onclick="redirectToPage()">Start</button>
+  <script>
+  function redirectToPage() {
+      // 使用 window.location.href 属性跳转到另一个页面
+      window.location.href = 'story.html'; // 将链接更改为您要跳转的页面链接
+  }
+  </script>
+</div>
+</body>
+</html>

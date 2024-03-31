@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="css_question.css">
+    <style>
+        /* 居中容器 */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* 左对齐 */
+            justify-content: center;
+            height: 100vh; /* 让容器占据整个视口高度 */
+            padding-left: 20px; /* 增加左侧填充以调整内容位置 */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="question" id="question1">
+            <h4>1.Muoce自杀时的情绪是</h4>
+            <div>
+                <input type="radio" name="q1" value="option1">
+                <label for="option1">A.痛苦</label><br>
+                <input type="radio" name="q1" value="option2">
+                <label for="option2">B.愤怒</label><br>
+                <input type="radio" name="q1" value="option3">
+                <label for="option3">C.愧疚</label><br>
+                <input type="radio" name="q1" value="option4">
+                <label for="option4">D.释然</label><br>
+            </div>
+        </div>
+
+        <div class="question" id="question2">
+            <h4>2.Muoce最快乐的时光是</h4>
+            <div>
+                <input type="radio" name="q2" value="option1">
+                <label for="option1">A.追查罪犯时</label><br>
+                <input type="radio" name="q2" value="option2">
+                <label for="option2">B.被视为英雄时</label><br>
+                <input type="radio" name="q2" value="option3">
+                <label for="option3">C.被厌弃前</label><br>
+                <input type="radio" name="q2" value="option4">
+                <label for="option4">D.被厌弃后</label><br>
+            </div>
+        </div>
+
+        <div class="question" id="question3">
+            <h4>3.除罪犯外，最早知道真相的人是</h4>
+            <div>
+                <input type="radio" name="q3" value="option1">
+                <label for="option1">A.Muoce</label><br>
+                <input type="radio" name="q3" value="option2">
+                <label for="option2">B.Jusce</label><br>
+                <input type="radio" name="q3" value="option3">
+                <label for="option3">C.警局前辈</label><br>
+                <input type="radio" name="q3" value="option4">
+                <label for="option4">D.恋人</label><br>
+                <input type="radio" name="q3" value="option5">
+                <label for="option5">E.医生</label><br>
+                <input type="radio" name="q3" value="option6">
+                <label for="option6">F.第二个嫌疑人</label><br>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+
+        <button id="submitBtn">验证答案</button>
+        <h4>全部回答正确后，可以查看真相哦~</h4>
+        <button id="unlockBtn" style="display:none;">显示真相</button>
+    </div>
+
+    <script src="script_question.js"></script>
+</body>
+
+</html>

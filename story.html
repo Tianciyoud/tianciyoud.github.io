@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<title>story_page</title>
+<style>
+  body {
+    margin: 0; /* 清除默认页边距 */
+    padding: 0; /* 清除默认内边距 */
+  }
+  .container {
+    max-width: 940px; /* 设置容器最大宽度 */
+    margin: 0 auto; /* 左右居中 */
+    padding: 0 20px; /* 左右页边距相同 */
+  }
+  .iframe-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 三列布局 */
+    gap: 20px; /* 设置列间距 */
+    margin-top: 20px; /* 上边距 */
+  }
+  .iframe-container iframe {
+    width: 100%; /* iframe 宽度占满父容器 */
+    height: 210px;
+    border: none; /* 去除边框 */
+  }
+  .custom-button {
+              padding: 20px 40px; /* 按钮内边距 */
+              font-size: 30px; /* 字体大小 */
+              background-color:red /* 背景颜色 */
+              color: #FCFCFC; /* 文字颜色 */
+              border: none; /* 去除边框 */
+              border-radius: 8px; /* 圆角 */
+              cursor: pointer; /* 鼠标样式 */
+              transition: background-color 0.3s; /* 过渡效果 */
+          }
+
+          /* 按钮悬停效果 */
+          .custom-button:hover {
+              background-color:#930000; /* 悬停时背景颜色 */
+          }
+</style>
+</head>
+<body>
+<div class="container">
+  <h3 align="center">巡警之殇</h3>
+  <p id="typewriter-text" align="center"></p>
+
+  <br>
+  <h4 align="center">关键词</h4>
+  <p>tips:1.第七、八、九个关键词按钮此时应该是禁用状态，但受技术所限本人没能实现这个效果，所以在没有收到提示前先假装它们是点不开的吧...<br>2.想答对所有题目的理论最低提问数是18个（共43个提问），来挑战看看你需要问几个问题来查出故事真相吧！</p>
+  <div class="iframe-container">
+    <iframe src="try.html" scrolling="no"></iframe>
+    <iframe src="Jusce.html" scrolling="no"></iframe>
+    <iframe src="恋人.html" scrolling="no"></iframe>
+    <iframe src="警局前辈.html" scrolling="no"></iframe>
+    <iframe src="搏斗.html" scrolling="no"></iframe>
+    <iframe src="犯罪基因.html" scrolling="no"></iframe>
+    <iframe src="第二个嫌疑人.html" scrolling="no"></iframe>
+    <iframe src="手术.html" scrolling="no"></iframe>
+    <iframe src="医生.html" scrolling="no"></iframe>
+  </div>
+  <div style="text-align: center; margin-top: 50px;">
+        <button onclick="redirectToPage()" class="custom-button">跳转答题页</button>
+  </div>
+  <br>
+  <br>
+  <br>
+</div>
+
+<script>
+  // 文字内容
+  var text = "近日，一个携带“犯罪基因”的罪犯制造了多起命案，当地人心惶惶。最终，巡警Muoce追查到了罪犯Jusce并将其打至重伤，帮助警方破获了案件，他也因此被民众视作英雄，备受欢迎。但好景不长，两个月后，Muoce被情同父子的警局前辈和相知相惜的恋人厌弃，他痛苦万分，悲而自尽。";
+  var index = 0;
+
+  // 获取显示文字的元素
+  var typewriterText = document.getElementById('typewriter-text');
+
+  // 创建定时器，每隔一段时间显示一个字
+  var timer = setInterval(function() {
+    // 检查是否已经显示完所有文字
+    if (index < text.length) {
+      // 将下一个字添加到显示文字的元素中
+      typewriterText.innerHTML += text.charAt(index);
+      index++;
+    } else {
+      // 如果文字全部显示完毕，清除定时器
+      clearInterval(timer);
+    }
+  }, 150); // 控制文字显示的速度，单位为毫秒
+
+  function redirectToPage() {
+      // 使用 window.location.href 属性跳转到另一个页面
+      window.location.href = 'question.html'; // 将链接更改为您要跳转的页面链接
+  }
+</script>
+</body>
+</html>

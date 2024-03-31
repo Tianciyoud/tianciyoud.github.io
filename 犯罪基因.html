@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dynamic Popups</title>
+<style>
+    .button-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #fff;
+        padding: 20px;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+    }
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 900;
+    }
+    .popup.active,
+    .overlay.active {
+        display: block;
+    }
+    .element {
+      width: 230px; /* 设置弹窗宽度 */
+      height: 160px; /* 设置弹窗高度 */
+      background-color: #fff;
+      border: 1px solid #ccc;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      display: none;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .element p {
+        margin: 0;
+    }
+
+    .element.active {
+        display: block;
+    }
+    /* 新增样式，控制按钮的排列 */
+    .button-container.grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px;
+    }
+    /* 新增样式，控制按钮容器的居中 */
+    .button-container.centered {
+        display: flex;
+        justify-content: center;
+    }
+
+    .centered-text {
+    text-align: center;
+    }
+
+    body {
+    background-image: url('back.jpg');
+    background-size: cover; /* 确保图片铺满整个页面 */
+    background-repeat: no-repeat; /* 防止图片重复显示 */
+    }
+
+    .button {
+    background-color:transparent; /* 设置背景颜色 */
+    color:white; /* 设置文字颜色 */
+
+    .red-text {
+    color: red;
+    }
+
+    .typing-animation {
+    overflow: hidden; /* 隐藏超出容器的内容 */
+    white-space: nowrap; /* 禁止文字换行 */
+    animation: typing 1s steps(1, end) forwards; /* 使用动画效果，每步显示一个字符 */
+    }
+
+    @keyframes typing {
+        from { width: 0; } /* 从宽度为0开始 */
+        to { width: 100%; } /* 增加到100%宽度 */
+    }
+
+</style>
+</head>
+<body>
+
+<div class="button-container">
+    <button id="mainButton" onclick="generateButtons()" class="button">犯罪基因</button>
+</div>
+
+<div id="generatedButtons" class="button-container grid">
+    <!-- Generated buttons will be placed here -->
+</div>
+
+<div id="overlay" class="overlay"></div>
+
+<div id="elementContainer" class="element"></div>
+
+<script>
+    // Custom button names without a pattern
+    var customButtonInfo = [
+        { name: '稀有', question: '<div class="centered-text">是否要针对<br><span style="color: red;">犯罪基因稀有吗</span><br>进行提问？</div>', answer: '<div class="centered-text">是</div>' },
+        { name: '人为制造', question: '<div class="centered-text">是否要针对<br><span style="color: red;">犯罪基因是人为制造的吗</span><br>进行提问？</div>', answer: '<div class="centered-text">否</div>' },
+        { name: '感情', question: '<div class="centered-text">是否要针对<br><span style="color: red;">犯罪基因对人的感情有影响吗</span><br>进行提问？</div>', answer: '<div class="centered-text">是</div>' },
+        { name: '智商', question: '<div class="centered-text">是否要针对<br><span style="color: red;">犯罪基因对人的智商有影响吗</span><br>进行提问？</div>', answer: '<div class="centered-text">否</div>' },
+        { name: '移除', question: '<div class="centered-text">是否要针对<br><span style="color: red;">犯罪基因可以被移除吗</span><br>进行提问？</div>', answer: '<div class="centered-text">否</div>' },
+        { name: '遗传', question: '<div class="centered-text">是否要针对<br><span style="color: red;">犯罪基因可以被遗传吗</span><br>进行提问？</div>', answer: '<div class="centered-text">是</div>' }
+
+    ];
+
+    function generateButtons() {
+        var container = document.getElementById('generatedButtons');
+        container.innerHTML = ''; // Clear previous buttons
+
+        for (var i = 0; i < customButtonInfo.length; i++) {
+            var buttonInfo = customButtonInfo[i];
+            var button = document.createElement('button');
+            button.textContent = buttonInfo.name;
+            button.onclick = function(info) {
+                return function() {
+                    showPopup(info.question, info.answer);
+                };
+            }(buttonInfo); // Using a closure to preserve the value of buttonInfo
+            container.appendChild(button);
+        }
+    }
+
+    function showPopup(question, answer) {
+        var elementContainer = document.getElementById('elementContainer');
+        elementContainer.innerHTML = '<p>' + question + '</p>';
+        elementContainer.classList.add('active');
+
+        // 创建按钮容器
+        var buttonContainer = document.createElement('div');
+        buttonContainer.classList.add('button-container');
+        buttonContainer.classList.add('centered'); // 居中对齐按钮
+        elementContainer.appendChild(buttonContainer);
+
+        // 添加确认按钮
+        var confirmButton = document.createElement('button');
+        confirmButton.textContent = '是';
+        confirmButton.onclick = function() {
+            elementContainer.innerHTML = ''; // Clear the current popup
+            elementContainer.classList.remove('active'); // Hide the current popup
+            showNewPopup(answer); // Generate and show a new popup with the answer
+        };
+        buttonContainer.appendChild(confirmButton);
+
+        // 添加关闭按钮
+        var closeButton = document.createElement('button');
+        closeButton.textContent = '否';
+        closeButton.onclick = function() {
+            elementContainer.classList.remove('active');
+        };
+        buttonContainer.appendChild(closeButton);
+    }
+
+    function showNewPopup(content) {
+        var newPopup = document.createElement('div');
+        newPopup.classList.add('element');
+        newPopup.classList.add('active');
+        newPopup.innerHTML = '<p>' + content + '</p>';
+
+        // 添加关闭按钮
+        var closeButton = document.createElement('button');
+        closeButton.textContent = '关闭';
+        closeButton.onclick = function() {
+            newPopup.classList.remove('active');
+        };
+        newPopup.appendChild(closeButton);
+
+        document.body.appendChild(newPopup);
+
+        // 设置按钮水平居中
+        closeButton.style.position = 'absolute';
+        closeButton.style.left = '50%';
+        closeButton.style.top = '80%';
+        closeButton.style.transform = 'translate(-50%, -50%)';
+    }
+
+</script>
+
+</body>
+</html>
